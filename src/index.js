@@ -9,6 +9,8 @@ import "semantic-ui-css/semantic.min.css";
 
 const routes = makeMainRoutes();
 
+const kry0n = "hello";
+
 export const UserContext = React.createContext();
 
 class App extends Component {
