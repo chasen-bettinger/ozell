@@ -1,40 +1,43 @@
 import React from "react";
-import { Image, Item } from "semantic-ui-react";
+import { Item, Button } from "semantic-ui-react";
+import PropTypes from 'prop-types'
 
-const Feature = () => (
+const Feature = (props) => {
+  const { updateRating, features } = props;
+  // TODO: Dyanmic ids
+  // TODO: Dyanmic votes
+  // TODO: Loop through all of the features and print them out
+
+  const buildFeatures = () => {
+    const allFeatures = []
+    for (let i = 0; i < features; i++) {
+      allFeatures.push( (
+      <Item key={i}>
+      <Item.Content>
+        <Item.Header>Header</Item.Header>
+        <Item.Description>
+          Description
+        </Item.Description>
+        <Item.Extra><Button onClick={() => updateRating(1, 'up')}>450 👍</Button><Button onClick={() => updateRating(1, 'down')}>450 👎</Button></Item.Extra>
+      </Item.Content>
+    </Item>
+      ))
+    }
+
+    return allFeatures;
+  }
+
+
+  return (
   <Item.Group>
-    <Item>
-      <Item.Image
-        size="tiny"
-        src="https://react.semantic-ui.com/images/wireframe/image.png"
-      />
-
-      <Item.Content>
-        <Item.Header as="a">Header</Item.Header>
-        <Item.Meta>Description</Item.Meta>
-        <Item.Description>
-          <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />
-        </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
-      </Item.Content>
-    </Item>
-
-    <Item>
-      <Item.Image
-        size="tiny"
-        src="https://react.semantic-ui.com/images/wireframe/image.png"
-      />
-
-      <Item.Content>
-        <Item.Header as="a">Header</Item.Header>
-        <Item.Meta>Description</Item.Meta>
-        <Item.Description>
-          <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />
-        </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
-      </Item.Content>
-    </Item>
+    {buildFeatures()}
   </Item.Group>
-);
+  )
+  };
+
+Feature.propTypes = {
+  updateRating: PropTypes.func.isRequired,
+  features: PropTypes.number.isRequired 
+}
 
 export default Feature;

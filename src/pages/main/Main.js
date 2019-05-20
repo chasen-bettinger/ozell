@@ -4,7 +4,8 @@ import { Grid, Header, Form } from "semantic-ui-react";
 import Feature from "./components/Feature";
 
 const DB_MAP = {
-  textarea: "feature"
+  textarea: "feature",
+  input: "featureTitle"
 };
 
 const Main = () => {
@@ -16,6 +17,10 @@ const Main = () => {
 
     setFormValues({});
   };
+  const updateRating = (id, rating) => {
+    // TODO: Axios call to update this user's rating
+    console.log({id, rating})
+  }
 
   console.log(formValues[DB_MAP["textarea"]]);
 
@@ -26,6 +31,12 @@ const Main = () => {
       </Grid.Row>
       <Grid.Row columns={"equal"}>
         <Form onSubmit={submitForm} className="fill" widths="equal">
+          <Form.Input
+            onChange={handleChange}
+            name={DB_MAP["input"]}
+            value={formValues[DB_MAP["input"]]}
+            placeholder="The title feature you are requesting..."
+          />
           <Form.TextArea
             onChange={handleChange}
             name={DB_MAP["textarea"]}
@@ -36,7 +47,7 @@ const Main = () => {
         </Form>
       </Grid.Row>
       <Grid.Row>
-        <Feature />
+        <Feature features={3} updateRating={updateRating} />
       </Grid.Row>
     </Grid>
   );
