@@ -5,24 +5,29 @@ import Feature from "./components/Feature";
 
 const DB_MAP = {
   textarea: "feature",
-  input: "featureTitle"
+  input: "title"
 };
 
-const Main = () => {
-  const [formValues, setFormValues] = useState({});
+const initialState = {
+  feature: '',
+  title: ''
+}
 
-  const handleChange = (e, { name, value }) => setFormValues({ [name]: value });
+const Main = () => {
+  const [formValues, setFormValues] = useState({...initialState});
+  const handleChange = (e, { name, value }) => setFormValues({ ...formValues, [name]: value });
   const submitForm = () => {
     console.log({ formValues });
 
-    setFormValues({});
+    setFormValues({...initialState})
   };
+
   const updateRating = (id, rating) => {
     // TODO: Axios call to update this user's rating
     console.log({id, rating})
   }
 
-  console.log(formValues[DB_MAP["textarea"]]);
+  console.log(formValues);
 
   return (
     <Grid>
@@ -33,14 +38,14 @@ const Main = () => {
         <Form onSubmit={submitForm} className="fill" widths="equal">
           <Form.Input
             onChange={handleChange}
-            name={DB_MAP["input"]}
-            value={formValues[DB_MAP["input"]]}
-            placeholder="The title feature you are requesting..."
+            name={"title"}
+            value={formValues["title"]}
+            placeholder="The title of the feature you are requesting..."
           />
           <Form.TextArea
             onChange={handleChange}
-            name={DB_MAP["textarea"]}
-            value={formValues[DB_MAP["textarea"]]}
+            name={"feature"}
+            value={formValues["feature"]}
             placeholder="The feature you are requesting..."
           />
           <Form.Button>Add</Form.Button>
